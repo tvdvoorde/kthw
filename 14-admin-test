@@ -1,0 +1,3 @@
+kubectl run nginx --image=nginx --replicas=4
+kubectl get pods -o wide
+kubectl expose deployment nginx --port=80 --type=NodePort
