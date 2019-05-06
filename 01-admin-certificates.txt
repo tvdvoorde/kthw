@@ -266,3 +266,6 @@ cfssl gencert \
   service-account-csr.json | cfssljson -bare service-account
 
 }
+
+openssl x509 -in worker0.pem -text -noout
+
