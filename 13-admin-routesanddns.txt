@@ -1,0 +1,14 @@
+az network route-table create -g ${RESOURCE_GROUP} -n kubernetes-routes
+az network vnet subnet update -g ${RESOURCE_GROUP} -n ${RESOURCE_GROUP}-vnet01-vlan01 --vnet-name ${RESOURCE_GROUP}-vnet01 --route-table kubernetes-routes
+for i in 0 1 2; do
+az network route-table route create -g ${RESOURCE_GROUP} \
+  -n kubernetes-route-10-200-${i}-0-24 \
+  --route-table-name kubernetes-routes \
+  --address-prefix 10.200.${i}.0/24 \
+  --next-hop-ip-address 10.240.0.2${i} \
+  --next-hop-type VirtualAppliance
+done
+az network route-table route list -g ${RESOURCE_GROUP} --route-table-name kubernetes-routes -o table
+
+kubectl apply -f https://storage.googleapis.com/kubernetes-the-hard-way/coredns.yaml
+kubectl get pods -l k8s-app=kube-dns -n kube-system
