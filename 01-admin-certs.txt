@@ -1,7 +1,7 @@
 sudo -i
 
 az login --use-device-code
-for instance in worker0 worker1; do
+for instance in worker0 worker1 worker2; do
     RESOURCE_GROUP=$(curl --silent  http://169.254.169.254/Metadata/instance?api-version=2017-08-01 -H metadata:true|jq -r '.compute.resourceGroupName')
     EXTERNAL_IP=$(host ${RESOURCE_GROUP}lbpubip.westeurope.cloudapp.azure.com|awk '/has address/ { print $4 }')
     INTERNAL_IP=$(az network nic ip-config show -g "${RESOURCE_GROUP}" -n "ipconfig1" --nic-name ${instance}-nic01 --query "privateIpAddress" --out tsv)
@@ -218,8 +218,7 @@ cfssl gencert \
 # API
 
 {
-RESOURCE_GROUP=$(curl --silent  http://169.254.169.254/Metadata/instance?api-version=2017-08-01 -H metadata:true|jq -r '.compute.resourceGroupName')
-EXTERNAL_IP=$(host ${RESOURCE_GROUP}lbpubip.westeurope.cloudapp.azure.com|awk '/has address/ { print $4 }')
+
 cat > kubernetes-csr.json <<EOF
 {
   "CN": "kubernetes",
