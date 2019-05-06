@@ -1,14 +1,25 @@
 kubectl run nginx --image=nginx --replicas=3
 kubectl get pods -o wide
+#
+# wait ...
+#
 kubectl expose deployment nginx --port=80 --type=NodePort
 kubectl describe service nginx
-curl http://worker0:<nodeport>
+curl http://worker0:30131
+
+
 
 kubectl run httpd --image=httpd --restart=Never
 kubectl expose pod httpd --port=80 --type=ClusterIP
 kubectl run --generator=run-pod/v1 busybox --image=busybox:1.28 --command -- sleep 3600
+kubectl get pods -o wide
+#
+# wait ...
+#
 kubectl exec -ti busybox -- nslookup kubernetes
 kubectl exec -ti busybox -- nslookup httpd
+kubectl logs httpd
+
 
 kubectl delete deployment nginx
 kubectl delete service nginx
