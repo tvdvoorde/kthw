@@ -2,3 +2,6 @@ sudo -i
 
 az login --use-device-code
 
+curl https://..../install.sh | sudo bash
+
+
