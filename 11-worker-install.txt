@@ -1,3 +1,5 @@
+POD_CIDR="$(echo $(curl --silent -H Metadata:true "http://169.254.169.254/metadata/instance/compute/tags?api-version=2017-08-01&format=text") | cut -d : -f2)"
+
 mkdir -p \
   /etc/cni/net.d \
   /opt/cni/bin \
@@ -6,8 +8,6 @@ mkdir -p \
   /var/lib/kubernetes \
   /var/run/kubernetes
 
-#
-
 mv runsc-50c283b9f56bb7200938d9e207355f05f79f0d17 runsc
 mv runc.amd64 runc
 chmod +x kubectl kube-proxy kubelet runc runsc
@@ -15,13 +15,6 @@ mv kubectl kube-proxy kubelet runc runsc /usr/local/bin/
 tar -xvf crictl-v1.12.0-linux-amd64.tar.gz -C /usr/local/bin/
 tar -xvf cni-plugins-amd64-v0.6.0.tgz -C /opt/cni/bin/
 tar -xvf containerd-1.2.0-rc.0.linux-amd64.tar.gz -C /
-
-
-#
-
-
-
-#
 
 cat <<EOF | sudo tee /etc/cni/net.d/10-bridge.conf
 {
@@ -41,16 +34,12 @@ cat <<EOF | sudo tee /etc/cni/net.d/10-bridge.conf
 }
 EOF
 
-#
-
 cat <<EOF | sudo tee /etc/cni/net.d/99-loopback.conf
 {
     "cniVersion": "0.3.1",
     "type": "loopback"
 }
 EOF
-
-#
 
 sudo mkdir -p /etc/containerd/
 
@@ -71,8 +60,6 @@ cat << EOF | sudo tee /etc/containerd/config.toml
       runtime_engine = "/usr/local/bin/runsc"
       runtime_root = "/run/containerd/runsc"
 EOF
-
-#
 
 cat <<EOF | sudo tee /etc/systemd/system/containerd.service
 [Unit]
@@ -96,14 +83,9 @@ LimitCORE=infinity
 WantedBy=multi-user.target
 EOF
 
-#
-
 mv /home/azureuser/${HOSTNAME}-key.pem /home/azureuser/${HOSTNAME}.pem /var/lib/kubelet/
 mv /home/azureuser/${HOSTNAME}.kubeconfig /var/lib/kubelet/kubeconfig
 mv /home/azureuser/ca.pem /var/lib/kubernetes/
-
-
-#
 
 cat <<EOF | sudo tee /var/lib/kubelet/kubelet-config.yaml
 kind: KubeletConfiguration
@@ -126,8 +108,6 @@ runtimeRequestTimeout: "15m"
 tlsCertFile: "/var/lib/kubelet/${HOSTNAME}.pem"
 tlsPrivateKeyFile: "/var/lib/kubelet/${HOSTNAME}-key.pem"
 EOF
-
-#
 
 cat <<EOF | sudo tee /etc/systemd/system/kubelet.service
 [Unit]
@@ -153,11 +133,7 @@ RestartSec=5
 WantedBy=multi-user.target
 EOF
 
-#
-
 mv /home/azureuser/kube-proxy.kubeconfig /var/lib/kube-proxy/kubeconfig
-
-#
 
 cat <<EOF | sudo tee /var/lib/kube-proxy/kube-proxy-config.yaml
 kind: KubeProxyConfiguration
@@ -167,8 +143,6 @@ clientConnection:
 mode: "iptables"
 clusterCIDR: "10.200.0.0/16"
 EOF
-
-#
 
 cat <<EOF | sudo tee /etc/systemd/system/kube-proxy.service
 [Unit]
@@ -185,11 +159,7 @@ RestartSec=5
 WantedBy=multi-user.target
 EOF
 
-#
-
 crictl config runtime-endpoint unix:///run/containerd/containerd.sock
-
-#
 
 systemctl daemon-reload
 systemctl enable containerd kubelet kube-proxy
