@@ -1,4 +1,9 @@
-# Phase 1 on ADMIN
+# Kubernetes The Hard Way on Azure VM's
+
+Adopted from https://github.com/kelseyhightower/kubernetes-the-hard-way
+All credits for original content to Kelsey Hightower
+
+## Phase 1 on ADMIN
 
 ```
 sudo -i
@@ -10,7 +15,7 @@ curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/04-admin-copyconfig
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/05-admin-createcopysecret.txt | sudo bash
 ```
 
-# Phase 2 on CONTROL0/CONTROL1/CONTROL2
+## Phase 2 on CONTROL0/CONTROL1/CONTROL2
 
 ```
 sudo -i
@@ -27,13 +32,13 @@ curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/07-control-kube.txt
 kubectl get componentstatuses --kubeconfig /home/azureuser/admin.kubeconfig
 ```
 
-# Phase 3 only on CONTROL0
+## Phase 3 only on CONTROL0
 
 ```
 sudo -i
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/08-control0-rbac.txt | sudo bash
 ```
-# Phase 4 on ADMIN
+## Phase 4 on ADMIN
 
 ```
 sudo -i
@@ -43,7 +48,7 @@ curl https://${EXTERNAL_IP}:6443/healthz --insecure
 curl --cacert ca.pem https://${EXTERNAL_IP}:6443/version
 ```
 
-# Phase 5 on WORKER0/WORKER1/WORKER2
+## Phase 5 on WORKER0/WORKER1/WORKER2
 
 ```
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/10-worker-binaries.txt | sudo bash
@@ -51,7 +56,7 @@ curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/10-worker-binaries.
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/11-worker-install.txt | sudo bash
 ```
 
-# Phase 6 on ADMIN
+## Phase 6 on ADMIN
 
 ```
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/12-admin-client.txt | sudo bash
