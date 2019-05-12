@@ -10,6 +10,5 @@ az network route-table route create -g ${RESOURCE_GROUP} \
   --next-hop-type VirtualAppliance
 done
 az network route-table route list -g ${RESOURCE_GROUP} --route-table-name kubernetes-routes -o table
-
-kubectl apply -f https://storage.googleapis.com/kubernetes-the-hard-way/coredns.yaml
+kubectl apply -f https://raw.githubusercontent.com/tvdvoorde/kthw/master/coredns.yaml
 kubectl get pods -l k8s-app=kube-dns -n kube-system
