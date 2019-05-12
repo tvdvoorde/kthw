@@ -1,3 +1,4 @@
+RESOURCE_GROUP=$(curl --silent  http://169.254.169.254/Metadata/instance?api-version=2017-08-01 -H metadata:true|jq -r '.compute.resourceGroupName')
 az network route-table create -g ${RESOURCE_GROUP} -n kubernetes-routes
 az network vnet subnet update -g ${RESOURCE_GROUP} -n ${RESOURCE_GROUP}-vnet01-vlan01 --vnet-name ${RESOURCE_GROUP}-vnet01 --route-table kubernetes-routes
 for i in 0 1 2; do
