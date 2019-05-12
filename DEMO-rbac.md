@@ -11,6 +11,7 @@ Bash shell
 Navigate to the .kube directory in your userprofile folder in a COMMAND prompt
 
 `cd %userprofile%\.kube`
+
 Run
 
 ```
