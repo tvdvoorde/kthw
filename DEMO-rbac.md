@@ -2,7 +2,8 @@
 
 ## Requirements
 
-Minikube locally
+Minikube locally, kubectl running from a commmand prompt
+
 Bash shell
 
 ## Instructions
