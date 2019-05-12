@@ -54,6 +54,34 @@ curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/12-admin-client.txt
 
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/13-admin-routesanddns.txt | sudo bash
 
+kubectl get pods -l k8s-app=kube-dns -n kube-system
 
+# --- wait ---
 
+kubectl run nginx --image=nginx --replicas=3
+kubectl get pods -o wide
 
+# --- wait ---
+
+kubectl expose deployment nginx --port=80 --type=NodePort
+kubectl describe service nginx
+curl http://worker0:30131
+kubectl delete deployment nginx
+kubectl delete service nginx
+
+# --- wait ---
+
+kubectl run httpd --image=httpd --restart=Never
+kubectl expose pod httpd --port=80 --type=ClusterIP
+kubectl run --generator=run-pod/v1 busybox --image=busybox:1.28 --command -- sleep 3600
+kubectl get pods -o wide
+
+# --- wait ---
+
+kubectl exec -ti busybox -- nslookup kubernetes
+kubectl exec -ti busybox -- nslookup httpd
+kubectl logs httpd
+kubectl delete pod httpd
+kubectl delete service httpd
+kubectl delete pod busybox
+kubectl get all 
