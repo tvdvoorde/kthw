@@ -1,6 +1,6 @@
-# ----------------------------------
 # Phase 1 on ADMIN
 
+```
 sudo -i
 az login --use-device-code
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/01-admin-certificates.txt | sudo bash
@@ -8,10 +8,11 @@ curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/02-admin-copycerts.
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/03-admin-configs.txt | sudo bash
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/04-admin-copyconfigs.txt | sudo bash
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/05-admin-createcopysecret.txt | sudo bash
+```
 
-# ----------------------------------
 # Phase 2 on CONTROL0/CONTROL1/CONTROL2
 
+```
 sudo -i
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/06-control-etcd.txt | sudo bash
 
@@ -24,32 +25,35 @@ sudo ETCDCTL_API=3 etcdctl member list \
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/07-control-kube.txt | sudo bash
 
 kubectl get componentstatuses --kubeconfig /home/azureuser/admin.kubeconfig
+```
 
-# ----------------------------------
 # Phase 3 only on CONTROL0
 
+```
 sudo -i
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/08-control0-rbac.txt | sudo bash
-
-# ----------------------------------
+```
 # Phase 4 on ADMIN
 
+```
 sudo -i
 RESOURCE_GROUP=$(curl --silent  http://169.254.169.254/Metadata/instance?api-version=2017-08-01 -H metadata:true|jq -r '.compute.resourceGroupName')
 EXTERNAL_IP=$(host ${RESOURCE_GROUP}lbpubip.westeurope.cloudapp.azure.com|awk '/has address/ { print $4 }')
 curl https://${EXTERNAL_IP}:6443/healthz --insecure
 curl --cacert ca.pem https://${EXTERNAL_IP}:6443/version
+```
 
-# -----------------------------------
 # Phase 5 on WORKER0/WORKER1/WORKER2
 
+```
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/10-worker-binaries.txt | sudo bash
 
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/11-worker-install.txt | sudo bash
+```
 
-# ---------------------------------
 # Phase 6 on ADMIN
 
+```
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/12-admin-client.txt | sudo bash
 
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/13-admin-routesanddns.txt | sudo bash
@@ -85,3 +89,4 @@ kubectl delete pod httpd
 kubectl delete service httpd
 kubectl delete pod busybox
 kubectl get all 
+```
