@@ -1,6 +1,7 @@
 # Kubernetes The Hard Way on Azure VM's
 
 Adopted from https://github.com/kelseyhightower/kubernetes-the-hard-way
+
 All credits for original content to Kelsey Hightower
 
 ## Phase 1 on ADMIN
