@@ -114,7 +114,7 @@ EOF
   sudo systemctl enable kube-apiserver kube-controller-manager kube-scheduler
   sudo systemctl start kube-apiserver kube-controller-manager kube-scheduler
 }
-curl https://127.0.0.1:6443/healthz --insecure
+
 kubectl get componentstatuses --kubeconfig /home/azureuser/admin.kubeconfig
 
 
