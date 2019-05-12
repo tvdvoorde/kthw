@@ -6,6 +6,9 @@ kubectl get pods -o wide
 kubectl expose deployment nginx --port=80 --type=NodePort
 kubectl describe service nginx
 curl http://worker0:30131
+kubectl delete deployment nginx
+kubectl delete service nginx
+
 
 
 
@@ -19,14 +22,9 @@ kubectl get pods -o wide
 kubectl exec -ti busybox -- nslookup kubernetes
 kubectl exec -ti busybox -- nslookup httpd
 kubectl logs httpd
-
-
-kubectl delete deployment nginx
-kubectl delete service nginx
 kubectl delete pod httpd
 kubectl delete service httpd
 kubectl delete pod busybox
-
 kubectl get all 
 
 
