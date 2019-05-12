@@ -1,7 +1,25 @@
+# Phase 1 on ADMIN
+
 sudo -i
-
 az login --use-device-code
+curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/01-admin-certificates.txt | sudo bash
+curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/02-admin-copycerts.txt | sudo bash
+curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/03-admin-configs.txt | sudo bash
+curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/04-admin-copyconfigs.txt | sudo bash
+curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/05-admin-createcopysecret.txt | sudo bash
 
-curl https://..../install.sh | sudo bash
+# Phase 2 on CONTROL0/CONTROL1/CONTROL2
 
+curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/06-control-etcd.txt | sudo bash
+
+sudo ETCDCTL_API=3 etcdctl member list \
+  --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/etcd/ca.pem \
+  --cert=/etc/etcd/kubernetes.pem \
+  --key=/etc/etcd/kubernetes-key.pem
+  
+  
+curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/07-control-kube.txt | sudo bash
+
+kubectl get componentstatuses --kubeconfig /home/azureuser/admin.kubeconfig
 
