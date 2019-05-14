@@ -10,10 +10,10 @@ In the bash shell
 
 ```
 TOKEN=invalidtoken
-curl https://kubernetes/api --header "Authorization: Bearer $TOKEN" --insecure
+curl https://kubernetes/api --header "Authorization: Bearer $TOKEN" --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
 TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
-curl https://kubernetes/api --header "Authorization: Bearer $TOKEN" --insecure
-curl https://kubernetes/api/v1/namespaces/default/pods --header "Authorization: Bearer $TOKEN" --insecure
+curl https://kubernetes/api --header "Authorization: Bearer $TOKEN" --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+curl https://kubernetes/api/v1/namespaces/default/pods --header "Authorization: Bearer $TOKEN" --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
 exit
 ```
 
