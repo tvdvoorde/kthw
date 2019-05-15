@@ -22,12 +22,16 @@ curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/05-admin-createcopy
 sudo -i
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/06-control-etcd.txt | sudo bash
 
+# --- wait ---
+
 sudo ETCDCTL_API=3 etcdctl member list \
   --endpoints=https://127.0.0.1:2379 \
   --cacert=/etc/etcd/ca.pem \
   --cert=/etc/etcd/kubernetes.pem \
   --key=/etc/etcd/kubernetes-key.pem
-  
+
+# --- wait ---
+
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/07-control-kube.txt | sudo bash
 
 kubectl get componentstatuses --kubeconfig /home/azureuser/admin.kubeconfig
@@ -52,8 +56,9 @@ curl --cacert ca.pem https://${EXTERNAL_IP}:6443/version
 ## Phase 5 on WORKER0/WORKER1/WORKER2
 
 ```
+sudo -i
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/10-worker-binaries.txt | sudo bash
-
+# --- wait ---
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/11-worker-install.txt | sudo bash
 ```
 
@@ -62,7 +67,11 @@ curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/11-worker-install.t
 ```
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/12-admin-client.txt | sudo bash
 
+# --- wait ---
+
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/13-admin-routesanddns.txt | sudo bash
+
+# --- wait ---
 
 kubectl get pods -l k8s-app=kube-dns -n kube-system
 
