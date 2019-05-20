@@ -68,6 +68,10 @@ curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/12-admin-client.txt
 
 # --- wait ---
 
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+
+# --- wait ---
+
 curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/13-admin-routesanddns.txt | sudo bash
 
 # --- wait ---
