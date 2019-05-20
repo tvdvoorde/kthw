@@ -31,7 +31,7 @@ authorization:
   mode: Webhook
 clusterDomain: "cluster.local"
 clusterDNS:
-  - "10.32.0.10"
+  - "10.96.0.10"
 resolvConf: "/run/systemd/resolve/resolv.conf"
 runtimeRequestTimeout: "15m"
 
