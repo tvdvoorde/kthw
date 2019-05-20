@@ -56,9 +56,9 @@ curl --cacert ca.pem https://${EXTERNAL_IP}:6443/version
 
 ```
 sudo -i
-curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/10-worker-binaries.txt | sudo bash
+curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/10-worker-binaries-1.14.txt | sudo bash
 # --- wait ---
-curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/11-worker-install.txt | sudo bash
+curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/11-worker-install-1.14.txt | sudo bash
 ```
 
 ## Phase 6 on ADMIN
