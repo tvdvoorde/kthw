@@ -72,6 +72,13 @@ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl versio
 
 # --- wait ---
 
+kubectl get pods --all-namespaces
+
+# --- wait ---
+
+kubectl run nginx --image=nginx --replicas=5
+kubectl get pods -o wide
+
 # DNS
 
 # --- wait ---
