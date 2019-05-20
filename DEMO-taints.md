@@ -92,7 +92,7 @@ kubectl run busybox --image=busybox --replicas=5 -- sleep 3600
 ## Observe
 
 ```
-kubectl get pods
+kubectl get pods -o wide
 ```
 
 ## Clean up
@@ -101,6 +101,12 @@ kubectl get pods
 kubectl delete -f nginx.yaml
 kubectl delete -f httpd.yaml
 kubectl delete deployment busybox
+kubectl taint node worker1 pref-
+kubectl taint node worker2 pref-
+kubectl label node worker1 conf-
+kubectl label node worker2 conf-
+
+
 ```
 
 
