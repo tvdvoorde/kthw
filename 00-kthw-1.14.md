@@ -3,6 +3,9 @@
 Adopted from https://github.com/kelseyhightower/kubernetes-the-hard-way
 
 All credits for original content to Kelsey Hightower
+Other credits to Mumshad Mannambeth
+
+Adjusted to Kubernetes 1.14, Docker container runtime & Weave networking
 
 ## Phase 1 on ADMIN
 
