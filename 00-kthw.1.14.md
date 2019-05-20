@@ -31,7 +31,7 @@ sudo ETCDCTL_API=3 etcdctl member list \
 
 # --- wait ---
 
-curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/07-control-kube.txt | sudo bash
+curl https://raw.githubusercontent.com/tvdvoorde/kthw/master/07-control-kube-1.14.txt | sudo bash
 
 kubectl get componentstatuses --kubeconfig /home/azureuser/admin.kubeconfig
 ```
