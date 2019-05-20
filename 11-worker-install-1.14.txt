@@ -1,5 +1,3 @@
-# POD_CIDR="$(echo $(curl --silent -H Metadata:true "http://169.254.169.254/metadata/instance/compute/tags?api-version=2017-08-01&format=text") | cut -d : -f2)"
-
 mkdir -p \
   /etc/cni/net.d \
   /opt/cni/bin \
@@ -69,7 +67,7 @@ apiVersion: kubeproxy.config.k8s.io/v1alpha1
 clientConnection:
   kubeconfig: "/var/lib/kube-proxy/kubeconfig"
 mode: "iptables"
-clusterCIDR: "10.200.0.0/16"
+clusterCIDR: "10.240.0.0/24"
 EOF
 
 cat <<EOF | sudo tee /etc/systemd/system/kube-proxy.service
