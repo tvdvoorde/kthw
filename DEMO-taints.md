@@ -2,7 +2,7 @@
 
 ## Requirements
 
-Three node cluster with node names 'node01', 'node02' and 'node03'
+Three node cluster with node names 'worker0', 'worker1' and 'worker2'
 
 ## Instructions
 
@@ -70,15 +70,15 @@ EOF
 ## Label nodes
 
 ```
-kubectl label node node01 conf=fastcpu
-kubectl label node node02 conf=highmem
+kubectl label node worker1 conf=fastcpu
+kubectl label node worker2 conf=highmem
 ```
 
 ## Taint Nodes
 
 ```
-kubectl taint node node01 pref=cpu:PreferNoSchedule
-kubectl taint node node02 pref=mem:PreferNoSchedule
+kubectl taint node worker1 pref=cpu:NoSchedule
+kubectl taint node worker2 pref=mem:NoSchedule
 ```
 
 ## Create deployments
