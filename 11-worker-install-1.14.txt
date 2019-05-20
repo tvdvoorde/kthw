@@ -89,7 +89,7 @@ WantedBy=multi-user.target
 EOF
 
 systemctl daemon-reload
-systemctl enable containerd kubelet kube-proxy
-systemctl stop containerd kubelet kube-proxy
-systemctl start containerd kubelet kube-proxy
+systemctl enable kubelet kube-proxy
+systemctl stop kubelet kube-proxy
+systemctl start kubelet kube-proxy
 
