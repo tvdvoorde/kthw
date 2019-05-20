@@ -3,6 +3,9 @@ On the admin workstation
 
 ```
 kubectl run curl --image=maiwj/curl --restart=Never -- sleep 3600
+
+# WAIT FOR THE POD TO BE READY
+
 kubectl exec curl -it -- /bin/sh
 ```
 
@@ -24,6 +27,9 @@ kubectl create serviceaccount podreader
 kubectl create role pod-reader --verb=get --verb=list --verb=watch --resource=pods
 kubectl create rolebinding podr-view --role=pod-reader --serviceaccount=default:podreader 
 kubectl run curl2 --image=maiwj/curl --serviceaccount=podreader --restart=Never -- sleep 3600 
+
+# WAIT FOR THE POD TO BE READY
+
 kubectl exec curl2 -it -- /bin/sh
 ```
 
