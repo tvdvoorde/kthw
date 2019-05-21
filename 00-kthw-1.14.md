@@ -84,7 +84,7 @@ kubectl get pods -o wide
 
 # DNS
 
-kubectl apply -f https://raw.githubusercontent.com/tvdvoorde/kthw/master/coredns-1.5.yaml
+kubectl apply -f https://raw.githubusercontent.com/tvdvoorde/kthw/master/coredns-mum.yaml
 kubectl get pods -l k8s-app=kube-dns -n kube-system
 
 # --- wait ---
